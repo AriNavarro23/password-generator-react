@@ -1,7 +1,13 @@
 import React from "react";
 import "./app.css";
 
+import { useState } from "react";
+
 export default function Home() {
+
+  const [password, setPassword] = useState("");
+  const [counter, setCounter] = useState(6);
+
   return (
     <main className="App">
       <div className="generator">
