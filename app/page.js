@@ -1,12 +1,40 @@
+"use client";
 import React from "react";
 import "./app.css";
-
 import { useState } from "react";
+import { upperCaseLetters, lowerCaseLetters, numbers, special } from "./data";
 
 export default function Home() {
-
   const [password, setPassword] = useState("");
   const [counter, setCounter] = useState(6);
+  const [isUpppercase, setIsUpppercase] = useState(false);
+  const [isLowercase, setIsLowercase] = useState(false);
+  const [isNumbers, setIsNumbers] = useState(false);
+  const [isSymbols, setIsSymbols] = useState(false);
+
+  const getRandom = () => {
+    const chars = [];
+    if (isUpppercase) {
+      chars.push(
+        upperCaseLetters[Math.floor(Math.random() * upperCaseLetters.length)]
+      );
+    }
+    if (isLowercase) {
+      chars.push(
+        lowerCaseLetters[Math.floor(Math.random() * lowerCaseLetters.length)]
+      );
+    }
+    if (isNumbers) {
+      chars.push(
+        numbers[Math.floor(Math.random() * numbers.length)]
+      );
+    }
+    if (isUpppercase) {
+      chars.push(
+        upperCaseLetters[Math.floor(Math.random() * upperCaseLetters.length)]
+      );
+    }
+  };
 
   return (
     <main className="App">
@@ -17,19 +45,43 @@ export default function Home() {
           <div className="generator__form-controls">
             <div className="generator__form-control">
               <label htmlFor="uppercase">Uppercase</label>
-              <input type="checkbox" id="uppercase" name="uppercase" />
+              <input
+                checked={isUpppercase}
+                onChange={(e) => setIsUpppercase(e.target.checked)}
+                type="checkbox"
+                id="uppercase"
+                name="uppercase"
+              />
             </div>
             <div className="generator__form-control">
               <label htmlFor="lowercase">Lowercase</label>
-              <input type="checkbox" id="lowercase" name="lowercase" />
+              <input
+                checked={isLowercase}
+                onChange={(e) => setIsLowercase(e.target.checked)}
+                type="checkbox"
+                id="lowercase"
+                name="lowercase"
+              />
             </div>
             <div className="generator__form-control">
               <label htmlFor="numbers">Numbers</label>
-              <input type="checkbox" id="numbers" name="numbers" />
+              <input
+                checked={isNumbers}
+                onChange={(e) => setIsNumbers(e.target.checked)}
+                type="checkbox"
+                id="numbers"
+                name="numbers"
+              />
             </div>
             <div className="generator__form-control">
               <label htmlFor="symbols">Symbols</label>
-              <input type="checkbox" id="symbols" name="symbols" />
+              <input
+                checked={isSymbols}
+                onChange={(e) => setIsSymbols(e.target.checked)}
+                type="checkbox"
+                id="symbols"
+                name="symbols"
+              />
             </div>
 
             <div className="generator__length">
@@ -41,7 +93,7 @@ export default function Home() {
               </div>
             </div>
             <div className="generator__form-actions">
-              <button className="generator__form-btn">Generate Password</button>
+              <button className="btn generate-btn">Generate Password</button>
               <button className="btn copy-btn">Copy password</button>
             </div>
           </div>

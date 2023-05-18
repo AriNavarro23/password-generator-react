@@ -61,7 +61,7 @@
 }
 
 .generator__length-counter span{
-    display:flex;
+    display: inline-block;
     font-size: 18px;
     width: 36px;
     text-align: center;
@@ -80,7 +80,7 @@
     cursor: pointer;
 }
 
-.generator__form-actions .generator-btn {
+.generator__form-actions .generate-btn {
     background: linear-gradient(to right, #a0c0ff, #b2abff);
 }
 
