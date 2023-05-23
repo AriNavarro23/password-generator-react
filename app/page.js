@@ -105,7 +105,12 @@ export default function Home() {
 
   return (
     <main className="App">
-      {modal.show && <Modal onClose={closeModalHandler} title={modal.title} message={modal.message} />}
+      {modal.show && 
+      <Modal 
+      onClose={closeModalHandler} 
+      title={modal.title} 
+      message={modal.message} 
+      />}
       <div className="generator">
         <h2 className="generator__title">Password Generator</h2>
         <h4 className="password">{password}</h4>
