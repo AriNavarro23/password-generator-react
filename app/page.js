@@ -12,6 +12,31 @@ export default function Home() {
   const [isNumbers, setIsNumbers] = useState(false);
   const [isSymbols, setIsSymbols] = useState(false);
 
+  const increaseCounter = (e) => {
+    e.preventDefault();
+    if (counter < 20) {
+      setCounter((prevCounter) => prevCounter + 1);
+    }
+  };
+
+  const decreaseCounter = (e) => {
+    e.preventDefault();
+    if (counter > 6) {
+      setCounter((prevCounter) => prevCounter - 1);
+    }
+  };
+
+  const generatePassword = (e) => {
+    e.preventDefault();
+    let _password = "";
+
+    for (let i = 0; i < counter; i++) {
+      _password += getRandom();
+    }
+
+    setPassword(_password);
+  };
+
   const getRandom = () => {
     const chars = [];
     if (isUpppercase) {
@@ -25,22 +50,22 @@ export default function Home() {
       );
     }
     if (isNumbers) {
-      chars.push(
-        numbers[Math.floor(Math.random() * numbers.length)]
-      );
+      chars.push(numbers[Math.floor(Math.random() * numbers.length)]);
     }
-    if (isUpppercase) {
-      chars.push(
-        upperCaseLetters[Math.floor(Math.random() * upperCaseLetters.length)]
-      );
+    if (isSymbols) {
+      chars.push(special[Math.floor(Math.random() * special.length)]);
     }
+
+    if (chars.length === 0) return "";
+
+    return chars[Math.floor(Math.random() * chars.length)];
   };
 
   return (
     <main className="App">
       <div className="generator">
         <h2 className="generator__title">Password Generator</h2>
-        <h4 className="password">Password</h4>
+        <h4 className="password">{password}</h4>
         <form className="generator__form">
           <div className="generator__form-controls">
             <div className="generator__form-control">
@@ -87,13 +112,15 @@ export default function Home() {
             <div className="generator__length">
               <h4 className="generator__length-title">Password Length</h4>
               <div className="generator__length-counter">
-                <button>-</button>
-                <span>6</span>
-                <button>+</button>
+                <button onClick={decreaseCounter}>-</button>
+                <span>{counter}</span>
+                <button onClick={increaseCounter}>+</button>
               </div>
             </div>
             <div className="generator__form-actions">
-              <button className="btn generate-btn">Generate Password</button>
+              <button onClick={generatePassword} className="btn generate-btn">
+                Generate Password
+              </button>
               <button className="btn copy-btn">Copy password</button>
             </div>
           </div>
