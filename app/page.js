@@ -1,6 +1,7 @@
 "use client";
-import React from "react";
 import "./app.css";
+import React from "react";
+import Modal from "./Modal";
 import { useState } from "react";
 import { upperCaseLetters, lowerCaseLetters, numbers, special } from "./data";
 
@@ -11,7 +12,13 @@ export default function Home() {
   const [isLowercase, setIsLowercase] = useState(false);
   const [isNumbers, setIsNumbers] = useState(false);
   const [isSymbols, setIsSymbols] = useState(false);
+  const [modal, setModal] = useState({
+    title: "",
+    show: false,
+    message: "",
+  });
 
+  //increase button
   const increaseCounter = (e) => {
     e.preventDefault();
     if (counter < 20) {
@@ -19,6 +26,7 @@ export default function Home() {
     }
   };
 
+  //decrease button
   const decreaseCounter = (e) => {
     e.preventDefault();
     if (counter > 6) {
@@ -26,6 +34,7 @@ export default function Home() {
     }
   };
 
+  //generate pass button
   const generatePassword = (e) => {
     e.preventDefault();
     let _password = "";
@@ -37,6 +46,7 @@ export default function Home() {
     setPassword(_password);
   };
 
+  //logic generate password
   const getRandom = () => {
     const chars = [];
     if (isUpppercase) {
@@ -61,8 +71,41 @@ export default function Home() {
     return chars[Math.floor(Math.random() * chars.length)];
   };
 
+  //copy button
+  const createCopy = () => {
+    const textAreaEl = document.createElement("textarea");
+    textAreaEl.value = password;
+    document.body.appendChild(textAreaEl);
+    textAreaEl.select();
+    document.execCommand("copy");
+    textAreaEl.remove();
+  };
+
+  const copyPasswordHandler = (e) => {
+    e.preventDefault();
+    if (password.trim().length === 0) {
+      setModal({
+        title: "Error",
+        message: "There is nothing to copy",
+        show: true,
+      });
+    } else {
+      setModal({
+        title: "Succes",
+        message: "Password successfully copied to clipboard",
+        show: true,
+      });
+    }
+    createCopy();
+  };
+
+  const closeModalHandler = () => {
+    setModal({ ...modal, show: false });
+  };
+
   return (
     <main className="App">
+      {modal.show && <Modal onClose={closeModalHandler} title={modal.title} message={modal.message} />}
       <div className="generator">
         <h2 className="generator__title">Password Generator</h2>
         <h4 className="password">{password}</h4>
@@ -121,7 +164,9 @@ export default function Home() {
               <button onClick={generatePassword} className="btn generate-btn">
                 Generate Password
               </button>
-              <button className="btn copy-btn">Copy password</button>
+              <button onClick={copyPasswordHandler} className="btn copy-btn">
+                Copy password
+              </button>
             </div>
           </div>
         </form>
