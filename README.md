@@ -1,4 +1,15 @@
+# Password Generator App
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a Password generator project, enjoy!
+
+## Preview
+[Link DEMO](https://crud-redux-e0nf17gcm-navarroaariel-hotmailcom.vercel.app)
+
+
+![Crud preview!](public/assets/video/passgen-gif.gif)
+
+
 
 ## Getting Started
 
