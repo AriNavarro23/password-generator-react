@@ -34,7 +34,7 @@ export default function Home() {
     }
   };
 
-  //generate pass button
+  //generate password 
   const generatePassword = (e) => {
     e.preventDefault();
     let _password = "";
@@ -46,7 +46,7 @@ export default function Home() {
     setPassword(_password);
   };
 
-  //logic generate password
+  //logic generate random choise
   const getRandom = () => {
     const chars = [];
     if (isUpppercase) {
@@ -71,7 +71,7 @@ export default function Home() {
     return chars[Math.floor(Math.random() * chars.length)];
   };
 
-  //copy button
+  //Logic copy to clipboard
   const createCopy = () => {
     const textAreaEl = document.createElement("textarea");
     textAreaEl.value = password;
@@ -81,6 +81,7 @@ export default function Home() {
     textAreaEl.remove();
   };
 
+  //Logic copy button modal
   const copyPasswordHandler = (e) => {
     e.preventDefault();
     if (password.trim().length === 0) {
@@ -99,18 +100,20 @@ export default function Home() {
     createCopy();
   };
 
+  //logic close modal
   const closeModalHandler = () => {
     setModal({ ...modal, show: false });
   };
 
   return (
     <main className="App">
-      {modal.show && 
-      <Modal 
-      onClose={closeModalHandler} 
-      title={modal.title} 
-      message={modal.message} 
-      />}
+      {modal.show && (
+        <Modal
+          onClose={closeModalHandler}
+          title={modal.title}
+          message={modal.message}
+        />
+      )}
       <div className="generator">
         <h2 className="generator__title">Password Generator</h2>
         <h4 className="password">{password}</h4>
@@ -167,7 +170,7 @@ export default function Home() {
             </div>
             <div className="generator__form-actions">
               <button onClick={generatePassword} className="btn generate-btn">
-                Generate Password
+                Generate password
               </button>
               <button onClick={copyPasswordHandler} className="btn copy-btn">
                 Copy password

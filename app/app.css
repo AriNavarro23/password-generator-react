@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     color: #292e5a;
-    background-color: #f3f4ff;
+    background-color: #21276a;
 }
 
 .generator{
@@ -85,5 +85,5 @@
 }
 
 .generator__form-actions .copy-btn {
-    background: linear-gradient(to right, #62f498, #88f4eb);
+    background: linear-gradient(to right, #fff763, #c6cd3b);
 }
